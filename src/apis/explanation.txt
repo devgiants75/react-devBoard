@@ -1,0 +1,79 @@
+관리자 계정 기능
+
+회원가입
+Endpoint: /admin/register
+Method: POST
+Body: { username: String, password: String }
+Response: { id: Number, username: String }
+
+로그인
+Endpoint: /admin/login
+Method: POST
+Body: { username: String, password: String }
+Response: { token: String }
+
+게시물 작성
+Endpoint: /posts
+Method: POST
+Body: { title: String, content: String, authorId: Number }
+Response: { id: Number, title: String, content: String, authorId: Number }
+
+게시물 조회
+Endpoint: /posts
+Method: GET
+Response: [{ id: Number, title: String, content: String, authorId: Number }]
+
+게시물 수정
+Endpoint: /posts/:id
+Method: PUT
+Body: { title: String, content: String }
+Response: { id: Number, title: String, content: String, authorId: Number }
+
+게시물 삭제
+Endpoint: /posts/:id
+Method: DELETE
+Response: { message: 'Post deleted successfully' }
+
+--------------------------------------------------------------------
+
+회원 계정 기능
+
+회원가입
+Endpoint: /users/register
+Method: POST
+Body: { userId: String, password: String, name: String, email: String }
+Response: { id: Number, username: String }
+
+로그인
+Endpoint: /users/login
+Method: POST
+Body: { username: String, password: String }
+Response: { token: String }
+
+댓글 작성
+Endpoint: /comments
+Method: POST
+Body: { postId: Number, userId: Number, content: String }
+Response: { id: Number, postId: Number, userId: Number, content: String }
+
+댓글 조회
+Endpoint: /comments?postId=:postId
+Method: GET
+Response: [{ id: Number, postId: Number, userId: Number, content: String }]
+
+댓글 수정
+Endpoint: /comments/:id
+Method: PUT
+Body: { content: String }
+Response: { id: Number, postId: Number, userId: Number, content: String }
+
+댓글 삭제
+Endpoint: /comments/:id
+Method: DELETE
+Response: { message: 'Comment deleted successfully' }
+
+게시물 좋아요
+Endpoint: /posts/:postId/like
+Method: POST
+Body: { userId: Number }
+Response: { postId: Number, userId: Number, likeCount: Number }

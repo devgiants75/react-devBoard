@@ -1,0 +1,65 @@
+{
+  "admins": [
+    {
+      "id": "1",
+      "username": "admin1",
+      "password": "adminpassword1"
+    },
+    {
+      "id": "2",
+      "username": "admin2",
+      "password": "adminpassword2"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "userId": "userId1",
+      "password": "userpassword1",
+      "name": "이이름",
+      "email": "user1@naver.com"
+    },
+    {
+      "id": "2",
+      "userId": "userId2",
+      "password": "userpassword2",
+      "name": "이성함",
+      "email": "user2@naver.com"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "First Post",
+      "content": "This is the first post.",
+      "authorId": 1
+    },
+    {
+      "id": "2",
+      "title": "Second Post",
+      "content": "This is the second post.",
+      "authorId": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "postId": 1,
+      "userId": 1,
+      "content": "Great post!"
+    },
+    {
+      "id": "2",
+      "postId": 1,
+      "userId": 2,
+      "content": "Thanks for sharing."
+    }
+  ],
+  "likes": [
+    {
+      "id": "1",
+      "postId": 1,
+      "userId": 2
+    }
+  ]
+}
