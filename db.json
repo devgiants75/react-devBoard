@@ -25,6 +25,13 @@
       "password": "userpassword2",
       "name": "이성함",
       "email": "user2@naver.com"
+    },
+    {
+      "id": "c4c5",
+      "userId": "qwe",
+      "password": "qwe",
+      "name": "qweqweqweqwe",
+      "email": "qweqweqweqweqwe"
     }
   ],
   "posts": [
@@ -60,6 +67,24 @@
       "id": "1",
       "postId": 1,
       "userId": 2
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+    },
+    {
+      "id": 2,
+      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+    },
+    {
+      "id": 3,
+      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+    },
+    {
+      "id": 4,
+      "url": "/images/maltese-1123016_640 - 복사본.jpg"
     }
   ]
 }

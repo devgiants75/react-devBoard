@@ -8,10 +8,6 @@ import { Button, Container, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../stores/user.store';
 
-interface LoginResponse {
-  token: string;
-}
-
 interface User {
   userId: string;
   password: string;
@@ -26,7 +22,6 @@ function Index() {
   const [cookies, setCookie] = useCookies(['userToken', 'userType']);
 
   const { setUser } = useStore();
-  
   const navigate = useNavigate();
 
   const handleTabChange = (event: ChangeEvent<object>, newValue: string) => {
@@ -52,11 +47,8 @@ function Index() {
         setCookie('userToken', token, { path: '/' });
         setCookie('userType', tabValue, { path: '/' });
 
-        
         setUser(user);
-  
         console.log('Login successful');
-
         navigate('/');
       } else {
         // 일치하는 사용자가 없는 경우

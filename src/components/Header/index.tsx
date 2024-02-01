@@ -15,13 +15,17 @@ export default function Index() {
   const { user, removeUser } = useStore();
 
   const signOutHandler = () => {
-    navigator('/');
+    
     if (user) {
+      // 전역 상태의 회원 정보 삭제
       removeUser(user.id);
+
+      // 해당 회원에 대한 쿠키 삭제
       removeCookie('userToken', { path: '/' }); // userToken 쿠키 삭제
       removeCookie('userType', { path: '/' });  // userType 쿠키 삭제
     }
     console.log('로그아웃됨');
+    navigator('/');
   };
 
   return (

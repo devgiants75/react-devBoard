@@ -25,6 +25,7 @@ const UserProfile = () => {
       return;
     }
 
+    // 여러 데이터 중 값의 선택이 가능
     const updates: Partial<Pick<User, 'name' | 'email'>> = {
       ...(name !== user.name && { name }),
       ...(email !== user.email && { email }),

@@ -4,6 +4,7 @@ import AdminSwitchLink from '../../components/AdminSwitchLink';
 import Button from '@mui/material/Button';
 import { Box, Container, FormHelperText, Typography } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Index() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,8 @@ function Index() {
     email: ''
   });
   const [isMatching, setIsMatching] = useState(true);
+
+  const navigator = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,11 +49,12 @@ function Index() {
 
       // 성공적인 회원가입 후의 로직
       console.log('회원 가입 성공:', response.data);
-      // 여기에 성공 시 추가적인 로직을 구현할 수 있습니다. 예: 로그인 페이지로 리디렉션
+      
+      navigator('/');
+
     } catch (error) {
       // 오류 처리
       console.error('회원 가입 실패:', error);
-      // 여기에 오류 시 처리 로직을 구현할 수 있습니다. 예: 오류 메시지 표시
     }
   };
 

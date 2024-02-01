@@ -6,7 +6,9 @@ interface InputFieldProps {
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // 선택: 페이지 렌더링 시 포커스 온
   autoFocus?: boolean;
+  // 선택: 필수사항 체크 온
   required?: boolean;
 }
 
