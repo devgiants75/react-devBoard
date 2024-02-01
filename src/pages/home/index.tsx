@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import UserProfile from '../MyPage/userProfile';
 import axios from 'axios';
@@ -20,6 +20,8 @@ type Image = {
 
 export default function index() {
   const [images, setImages] = useState<Image[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [url, setUrl] = useState<string | null>(null);
   const cookies = useCookies();
 
   useEffect(() => {
@@ -35,6 +37,47 @@ export default function index() {
     fetchImages();
   }, []);
 
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    setSelectedFile(file);
+
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setUrl(url);
+    }
+  };
+
+  // 선택된 파일 정보 표시(선택)
+  const fileInfo = selectedFile ? (
+    <p>File name: {selectedFile.name}</p>
+  ) : (
+    <p>No file selected</p>
+  );
+
+  const imgRegisterHandle = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64Image = reader.result as string;
+
+        axios
+          .post('http://localhost:5000/images', {
+            id: Date.now(),
+            image: base64Image
+          })
+          .then((response) => {
+            console.log('성공', response);
+          })
+          .catch((error) => {
+            console.log('에러', error);
+          });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div>
       <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
@@ -49,6 +92,18 @@ export default function index() {
           </ImageListItem>
         ))}
       </ImageList>
+
+      {url ? <img src={url} alt='이미지 미리보기' /> : null}
+      <form className='photo-form'>
+        <input
+          type='file'
+          className='photo-file'
+          name='file'
+          onChange={handleFileChange}
+        />
+        {/* <button onClick={imgRegisterHandle}>이미지 등록</button> */}
+      </form>
+      {fileInfo}
 
       <UserProfile />
     </div>
