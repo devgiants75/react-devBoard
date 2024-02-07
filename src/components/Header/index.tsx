@@ -1,31 +1,57 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom';
+
+import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useStore } from '../../stores/user.store';
+
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider
+} from '@mui/material';
+
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
+
+const drawerWidth = 240;
 
 export default function Index() {
   const navigator = useNavigate();
   const [cookies, , removeCookie] = useCookies(['userToken', 'userType']);
   const { user, removeUser } = useStore();
+  const [open, setOpen] = React.useState(false);
 
   const signOutHandler = () => {
-    
     if (user) {
       // 전역 상태의 회원 정보 삭제
       removeUser(user.id);
 
       // 해당 회원에 대한 쿠키 삭제
       removeCookie('userToken', { path: '/' }); // userToken 쿠키 삭제
-      removeCookie('userType', { path: '/' });  // userType 쿠키 삭제
+      removeCookie('userType', { path: '/' }); // userType 쿠키 삭제
     }
     console.log('로그아웃됨');
     navigator('/');
+  };
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -128,6 +154,7 @@ export default function Index() {
                     color='inherit'
                     aria-label='menu'
                     sx={{ mr: 2 }}
+                    onClick={handleDrawerOpen}
                   >
                     <MenuIcon />
                   </IconButton>
@@ -162,6 +189,78 @@ export default function Index() {
           </Box>
         </Toolbar>
       </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box'
+          }
+        }}
+        variant='persistent'
+        anchor='right'
+        open={open}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0 8px',
+            justifyContent: 'flex-end',
+            minHeight: '64px'
+          }}
+        >
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+            <ChevronRightIcon />
+            {/* 
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />} 
+            */}
+          </IconButton>
+        </Box>
+        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+          <nav aria-label='main mailbox folders'>
+            <List>
+              <ListItem disablePadding>
+                <Link to='/myPage'>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='마이페이지' />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              <ListItem disablePadding>
+                <Link to='/board'>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='게시판' />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            </List>
+          </nav>
+          <Divider />
+          <nav aria-label='secondary mailbox folders'>
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemText primary='회원정보수정' />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton component='a' href='#simple-list'>
+                  <ListItemText primary='회원탈퇴' />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </nav>
+        </Box>
+      </Drawer>
     </Box>
   );
 }

@@ -30,7 +30,7 @@
       "id": "c4c5",
       "userId": "qwe",
       "password": "qwe",
-      "name": "qweqweqweqwe",
+      "name": "qweqweqweqweqwe",
       "email": "qweqweqweqweqwe"
     }
   ],
@@ -72,19 +72,19 @@
   "images": [
     {
       "id": 1,
-      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+      "url": "/images/img1.jpg"
     },
     {
       "id": 2,
-      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+      "url": "/images/img2.jpg"
     },
     {
       "id": 3,
-      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+      "url": "/images/img3.jpg"
     },
     {
       "id": 4,
-      "url": "/images/maltese-1123016_640 - 복사본.jpg"
+      "url": "/images/img4.jpg"
     }
   ]
 }

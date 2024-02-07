@@ -17,6 +17,16 @@ import AdminRegister from './pages/register/admin_register';
 // 로그인 화면
 import Login from './pages/login';
 
+// 마이페이지 화면
+import UserProfile from './pages/myPage/userProfile';
+
+// 게시판 화면
+// - 메인 화면
+// - 게시글 작성 화면 board
+import Board from './pages/board';
+import BoardCreatePage from './pages/board/BoardCreatePage';
+import BoardEditPage from './pages/board/BoardEditPage';
+
 // # Router 설계`
 // 1. 'main' path 작성 : '/'
 // 2. 'login' path 작성 : '/login' (로그인)
@@ -40,16 +50,26 @@ function App() {
         <Route path='/' element={<Home />} />
 
         {/* Register 회원가입 */}
-        <Route  path='/register' element={<Register />} />
-        <Route  path='/register/admin' element={<AdminRegister />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/register/admin' element={<AdminRegister />} />
 
         {/* Login 로그인 */}
-        <Route path='login' element={<Login />} />
+        <Route path='/login' element={<Login />} />
+
+        {/* MyPage 마이페이지 */}
+        <Route path='/myPage'>
+          <Route index element={<UserProfile />} />
+        </Route>
+
+        {/* Board 게시판 */}
+        <Route path='/board'>
+          <Route index element={<Board />} />
+          <Route path='/board/create' element={<BoardCreatePage />} />
+          <Route path='/board/edit/:id' element={<BoardEditPage />} />
+        </Route>
       </Routes>
-      {
-        !path.pathname.startsWith('/register') &&
-        !path.pathname.startsWith('/login') && <Footer />
-      }
+      {!path.pathname.startsWith('/register') &&
+        !path.pathname.startsWith('/login') && <Footer />}
     </>
   );
 }
